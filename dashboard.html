@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Anti-Sleep Alarm</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="dashboard">
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <h2>🚗 Anti-Sleep</h2>
+            </div>
+            <ul class="nav-menu">
+                <li class="active" data-section="recordings"><a href="#recordings">📹 Recordings</a></li>
+                <li data-section="statistics"><a href="#statistics">📊 Statistics</a></li>
+                <li data-section="settings"><a href="#settings">⚙️ Settings</a></li>
+                <li><a href="#" id="logoutBtn">🚪 Logout</a></li>
+            </ul>
+        </nav>
+
+        <div class="main-content">
+            <header class="dashboard-header">
+                <h1 id="pageTitle">Drowsiness Detection Recordings</h1>
+                <div class="user-info">
+                    <span id="welcomeUser">Welcome, User</span>
+                </div>
+            </header>
+
+            <!-- Recordings Section -->
+            <div id="recordingsSection" class="content-section active">
+                <div class="stats-container">
+                    <div class="stat-card">
+                        <h3>Total Incidents</h3>
+                        <p class="stat-number" id="totalIncidents">0</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Today's Incidents</h3>
+                        <p class="stat-number" id="todayIncidents">0</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Storage Used</h3>
+                        <p class="stat-number" id="storageUsed">0 MB</p>
+                    </div>
+                </div>
+
+                <div class="recordings-section">
+                    <div class="section-header">
+                        <h2>Recent Recordings</h2>
+                        <button class="btn-refresh" id="refreshBtn">🔄 Refresh</button>
+                    </div>
+                    
+                    <div class="filters">
+                        <input type="date" id="filterDate" class="filter-input">
+                        <button class="btn-filter" id="filterBtn">Filter</button>
+                        <button class="btn-clear" id="clearFilterBtn">Clear</button>
+                    </div>
+
+                    <div class="recordings-grid" id="recordingsGrid">
+                        <div class="loading">Loading recordings...</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Statistics Section -->
+            <div id="statisticsSection" class="content-section">
+                <div class="stats-detailed">
+                    <h2>Detailed Statistics</h2>
+                    
+                    <div class="stats-cards-grid">
+                        <div class="stat-card-large">
+                            <h3>📊 Total Drowsiness Incidents</h3>
+                            <p class="stat-large" id="statTotalIncidents">0</p>
+                            <p class="stat-subtitle">All time incidents detected</p>
+                        </div>
+                        
+                        <div class="stat-card-large">
+                            <h3>📅 Today's Incidents</h3>
+                            <p class="stat-large" id="statTodayIncidents">0</p>
+                            <p class="stat-subtitle">Incidents detected today</p>
+                        </div>
+                        
+                        <div class="stat-card-large">
+                            <h3>📁 Total Storage</h3>
+                            <p class="stat-large" id="statStorageUsed">0 MB</p>
+                            <p class="stat-subtitle">Space used by recordings</p>
+                        </div>
+                        
+                        <div class="stat-card-large">
+                            <h3>🎥 Total Videos</h3>
+                            <p class="stat-large" id="statTotalVideos">0</p>
+                            <p class="stat-subtitle">Videos in database</p>
+                        </div>
+                    </div>
+
+                    <div class="stats-chart">
+                        <h3>Recent Activity (Last 7 Days)</h3>
+                        <div id="activityChart" class="chart-placeholder">
+                            <p>Chart showing daily incident counts will appear here</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Settings Section -->
+            <div id="settingsSection" class="content-section">
+                <div class="settings-panel">
+                    <h2>⚙️ Settings</h2>
+                    
+                    <div class="settings-group">
+                        <h3>Account Information</h3>
+                        <div class="settings-item">
+                            <label>Username:</label>
+                            <span id="settingsUsername">-</span>
+                        </div>
+                        <div class="settings-item">
+                            <label>User ID:</label>
+                            <span id="settingsUserId">-</span>
+                        </div>
+                    </div>
+
+                    <div class="settings-group">
+                        <h3>Storage Management</h3>
+                        <div class="settings-item">
+                            <label>Total Recordings:</label>
+                            <span id="settingsTotalRecordings">0</span>
+                        </div>
+                        <div class="settings-item">
+                            <label>Total Size:</label>
+                            <span id="settingsTotalSize">0 MB</span>
+                        </div>
+                        <button class="btn-danger" onclick="alert('Storage cleanup feature - Coming soon!')">Clear Old Recordings (30+ days)</button>
+                    </div>
+
+                    <div class="settings-group">
+                        <h3>System Information</h3>
+                        <div class="settings-item">
+                            <label>Server Status:</label>
+                            <span class="status-online">🟢 Online</span>
+                        </div>
+                        <div class="settings-item">
+                            <label>Database:</label>
+                            <span class="status-online">🟢 Connected</span>
+                        </div>
+                    </div>
+
+                    <div class="settings-group">
+                        <h3>Danger Zone</h3>
+                        <button class="btn-danger" onclick="if(confirm('Are you sure you want to delete ALL recordings? This cannot be undone!')) alert('Delete all feature - Connect to delete_all_recordings.php')">Delete All Recordings</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Video Modal -->
+    <div id="videoModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2 id="modalTitle">Recording Details</h2>
+            <video id="modalVideo" controls autoplay>
+                <source src="" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <div class="video-details">
+                <p><strong>📅 Date:</strong> <span id="modalDate"></span></p>
+                <p><strong>⏰ Time:</strong> <span id="modalTime"></span></p>
+                <p><strong>⏱️ Duration:</strong> <span id="modalDuration">20 seconds</span></p>
+                <p><strong>📁 File Size:</strong> <span id="modalFileSize"></span></p>
+            </div>
+            <div class="modal-actions">
+                <button class="btn-download" id="downloadBtn">⬇️ Download Video</button>
+                <button class="btn-delete" id="deleteBtn">🗑️ Delete Video</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="dashboard.js"></script>
+</body>
+</html>
