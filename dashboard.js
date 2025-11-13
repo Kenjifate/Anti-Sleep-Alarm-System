@@ -3,7 +3,7 @@ const userId = sessionStorage.getItem('user_id');
 const username = sessionStorage.getItem('username');
 
 if (!userId) {
-    window.location.href = 'login.html';
+    window.location.href = 'index.html';
 }
 
 // Set welcome message
@@ -144,4 +144,5 @@ document.getElementById('downloadBtn').addEventListener('click', function() {
     link.href = videoSrc;
     link.download = 'drowsiness_recording_' + new Date().getTime() + '.mp4';
     link.click();
+
 });
