@@ -13,7 +13,7 @@ document.getElementById('welcomeUser').textContent = `Welcome, ${username}`;
 document.getElementById('logoutBtn').addEventListener('click', function(e) {
     e.preventDefault();
     sessionStorage.clear();
-    window.location.href = 'login.html';
+    window.location.href = 'index.html';
 });
 
 // Load recordings on page load
@@ -146,3 +146,4 @@ document.getElementById('downloadBtn').addEventListener('click', function() {
     link.click();
 
 });
+
